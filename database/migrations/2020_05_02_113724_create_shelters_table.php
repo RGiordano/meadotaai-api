@@ -16,8 +16,8 @@ class CreateSheltersTable extends Migration
         Schema::create('shelters', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('city_id');
+            $table->unsignedBigInteger('photo_id')->nullable();
             $table->string('name', 150);
-            $table->string('photo_url', 150)->nullable();
             $table->string('address', 255)->nullable();
             $table->string('phone_number', 15)->nullable();
             $table->text('description');
@@ -28,7 +28,13 @@ class CreateSheltersTable extends Migration
                 ->references('id')
                 ->on('cities')
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
+
+            $table->foreign('photo_id')
+                ->references('id')
+                ->on('photos')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
         });
     }
 
