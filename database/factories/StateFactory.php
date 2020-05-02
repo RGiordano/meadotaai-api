@@ -5,7 +5,6 @@
 use App\Entities\Country;
 use App\Entities\State;
 use Faker\Generator as Faker;
-use Illuminate\Support\Str;
 
 $factory->define(State::class, function (Faker $faker) {
     return [

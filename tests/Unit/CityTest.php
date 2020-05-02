@@ -7,7 +7,7 @@ use App\Entities\Country;
 use App\Entities\State;
 use Tests\TestCase;
 
-class StateTest extends TestCase
+class CityTest extends TestCase
 {
     public function testCountryRelationship()
     {
@@ -17,29 +17,31 @@ class StateTest extends TestCase
         $country = factory(Country::class, 1)->create()->first();
 
         /**
-         * @var State $state
+         * @var City $city
          */
-        $state = factory(State::class, 1)->create([
+        $city = factory(City::class, 1)->create([
             'country_id' => $country->id
         ])->first();
 
-        $this->assertInstanceOf(Country::class, $state->country()->first());
-        $this->assertEquals($country->id, $state->country->id);
+        $this->assertInstanceOf(Country::class, $city->country()->first());
+        $this->assertEquals($country->id, $city->country->id);
     }
 
-    public function testCitiesRelationship()
+    public function testStateRelationship()
     {
         /**
          * @var State $state
          */
         $state = factory(State::class, 1)->create()->first();
 
-        factory(City::class, 2)->create([
+        /**
+         * @var City $city
+         */
+        $city = factory(City::class, 1)->create([
             'state_id' => $state->id
-        ]);
-        factory(City::class, 3)->create();
+        ])->first();
 
-        $this->assertInstanceOf(City::class, $state->cities()->first());
-        $this->assertEquals(2, $state->cities()->count());
+        $this->assertInstanceOf(State::class, $city->state()->first());
+        $this->assertEquals($state->id, $city->state->id);
     }
 }

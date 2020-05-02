@@ -3,25 +3,26 @@
 namespace App\Entities;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class State
+ * Class City
  *
  * @package App\Entities
  *
  * @property int $id
  * @property int $country_id
+ * @property int $state_id
  * @property string $name
+ * @property int $status
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $deleted_at
  *
  * @property Country $country
- * @property Collection $cities
+ * @property State $state
  */
-class State extends Model
+class City extends Model
 {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -32,10 +33,10 @@ class State extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function cities()
+    public function state()
     {
-        return $this->hasMany('App\Entities\City');
+        return $this->belongsTo('App\Entities\State');
     }
 }
