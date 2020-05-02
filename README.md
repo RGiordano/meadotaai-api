@@ -1,4 +1,4 @@
-#ME ADOTA AÍ - API
+# ME ADOTA AÍ - API
 "Me adota aí" is a non-profit project that aims to connect people with homeless pets
 
 ## Dependencies
